@@ -1,0 +1,45 @@
+<br/>
+<div class="container">
+  <div class="card">
+    <h5 class="card-header">Déclarer un problème</h5>
+    <div class="card-body">
+      <h5 class="card-title">Veuillez renseigner les zones et soumettre votre demande</h5>
+      <div class="card-text">
+        <form class="form-horizontal" 
+        novalidate
+        (ngSubmit)="save()"
+        [formGroup]="problemeForm">
+        <div class="form-group row">
+          <label for="prenomID" class="col-md-2 col-form-label text-right">Prénom : </label>
+          <div class="col-sm-10">
+            <input class="form-control" 
+            id="prenomeID" 
+            type="text"
+            placeholder="Votre prénom ici (obligatoire)" 
+            formControlName="nomPrenom"
+            [ngClass]="{'is-invalid':(problemeForm.get('nomPrenom').touched ||
+            problemeForm.get('nomPrenom').dirty) &&
+            !problemeForm.get('nomPrenom').valid,
+            'is-valid':(problemeForm.get('nomPrenom').touched ||
+            problemeForm.get('nomPrenom').dirty) &&
+            problemeForm.get('nomPrenom').valid}"
+            />
+            <span class="form-text" *ngIf="(problemeForm.get('nomPrenom').touched ||
+            problemeForm.get('nomPrenom').dirty) &&
+            problemeForm.get('nomPrenom').errors">
+              <span *ngIf="problemeForm.get('nomPrenom').errors.minlength">
+                <small class="text-muted">
+                  Veuillez entrer plus de caratères.
+                </small>
+              </span>
+              <span *ngIf="problemeForm.get('nomPrenom').errors.required">
+                <small class="text-muted">
+                  Merci de saisir votre prénom.
+                </small>
+              </span>
+            </span> 
+          </div>
+      </div>
+    </form>
+  </div>
+</div>
