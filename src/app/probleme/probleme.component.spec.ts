@@ -47,10 +47,10 @@ it('zone PRENOM valide avec 3 caracteres', () => {
   expect(zone.valid).toBeTruthy();
  });
 
- it('zone PRENOM valide avec 0 caracteres', () => {
+ it('zone PRENOM invalide avec 0 caracteres', () => {
   let zone = component.problemeForm.controls['nomPrenom'];
   zone.setValue('');
-  expect(zone.valid).toBeTruthy();
+  expect(zone.valid).toBeFalsy();
  });
 
  it('zone PRENOM invalide avec 1 caracteres', () => {
