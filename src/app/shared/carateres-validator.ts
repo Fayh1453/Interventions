@@ -9,4 +9,13 @@ export class VerifierSansEspaces {
             return { 'Valide' : true };
         };
     }
+    static longeurMinimum(min: number): ValidatorFn { 
+        return(c: AbstractControl): { [key: string]: boolean } | null => {
+           if ((c.value ||"").trim().length <= min){
+               return { 'Valide' : false };
+           }
+            return { 'Valide' : true };
+        };
+    }
+
 }
