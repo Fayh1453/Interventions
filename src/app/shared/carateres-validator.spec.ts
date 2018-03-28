@@ -1,7 +1,7 @@
 import { VerifierSansEspaces } from "./carateres-validator";
 import { AbstractControl } from "@angular/forms";
 
-describe('longueurMinimum Validator',()=>{
+describe('sansEspaces Validator',()=>{
     it('Une chaîne vide est invalide',()=>{
         let control ={value: ""};
         let validator = VerifierSansEspaces.sansEspaces();
@@ -30,7 +30,7 @@ describe('longueurMinimum Validator',()=>{
         expect(result['Valide']).toBe(true);
     
     });
-    describe('sansEspaces Validator',()=>{
+describe('longueurMinimum Validator',()=>{
     it('Une expression avec espace et 2 caractère est invalide',()=>{
         let control ={value: " xx"};
         let validator = VerifierSansEspaces.longeurMinimum(3);
