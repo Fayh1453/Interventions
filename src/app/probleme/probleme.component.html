@@ -32,7 +32,7 @@
                   Veuillez entrer plus de caratères.
                 </small>
               </span>
-              <span *ngIf="problemeForm.get('nomPrenom').errors.required">
+              <span *ngIf="!problemeForm.get('nomPrenom').errors.Espace">
                 <small class="text-muted">
                   Merci de saisir votre prénom.
                 </small>

@@ -56,7 +56,7 @@ it('zone PRENOM valide avec 3 caracteres', () => {
   let zone = component.problemeForm.get('nomPrenom');
   zone.setValue('');
   errors = zone.errors || {};
-  expect(errors['Valide']).toBeFalsy(); 
+  expect(errors['Espace']).toBeFalsy(); 
  });
 
  it('zone PRENOM invalide avec 1 caracteres', () => {
