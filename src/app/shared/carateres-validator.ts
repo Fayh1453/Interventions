@@ -18,4 +18,14 @@ export class VerifierSansEspaces {
         };
     }
 
+    static longeurMaximum(max: number): ValidatorFn { 
+        return(c: AbstractControl): { [key: string]: boolean } | null => {
+           if ((c.value ||"").trim().length > max){
+               return { 'LongMax' : false };
+           }
+            return { 'LongMax' : true };
+        };
+    }
+    
+
 }

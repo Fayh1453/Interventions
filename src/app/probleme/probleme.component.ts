@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { VerifierSansEspaces } from '../shared/carateres-validator';
+import { TypeService } from './type.service';
+import { IType } from './typeprobleme';
 
 @Component({
   selector: 'Inter-probleme',
@@ -10,13 +12,21 @@ import { VerifierSansEspaces } from '../shared/carateres-validator';
 export class ProblemeComponent implements OnInit {
 
   problemeForm: FormGroup;
-  constructor(private fb: FormBuilder) { }
+  typesProblemes: IType[];
+  errorMessage: string;
+  constructor(private fb: FormBuilder, private types: TypeService) { }
 
   ngOnInit() {
 
     this.problemeForm = this.fb.group({
-      nomPrenom: ['', [VerifierSansEspaces.longeurMinimum(3), VerifierSansEspaces.sansEspaces()]]
+     prenom: ['', [VerifierSansEspaces.longeurMinimum(3), VerifierSansEspaces.sansEspaces()]],
+      nom: ['', [VerifierSansEspaces.longeurMaximum(50), VerifierSansEspaces.longeurMinimum(1)]],
+      noType:['',Validators.required]
 
     });
+
+    this.types.obtenirTypes()
+    .subscribe(cat => this.typesProblemes = cat,
+               error => this.errorMessage = <any>error);    
   }
 }
