@@ -29,3 +29,16 @@ export class VerifierSansEspaces {
     
 
 }
+
+export class VerifierNotification {
+
+    static Vide(): ValidatorFn { 
+        return(c: AbstractControl): { [key: string]: boolean } | null => {
+           if ((c.value ) === ""){
+               return { 'Empty' : true };
+           }
+            return { 'Empty' : false };
+        };
+    }
+
+}

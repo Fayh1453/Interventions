@@ -21,12 +21,40 @@ export class ProblemeComponent implements OnInit {
     this.problemeForm = this.fb.group({
      prenom: ['', [VerifierSansEspaces.longeurMinimum(3), VerifierSansEspaces.sansEspaces()]],
       nom: ['', [VerifierSansEspaces.longeurMaximum(50), VerifierSansEspaces.longeurMinimum(1)]],
-      noType:['',Validators.required]
-
+      noType:['',Validators.required],
+      notification:['NePasMeNotifier'],
+      typeNotification:this.fb.group({
+       telephone:[{value: '', disabled: true}],
+       courriel:[{value: '', disabled: true}],
+       confirmation:[{value: '', disabled: true}]
+      })
     });
 
     this.types.obtenirTypes()
     .subscribe(cat => this.typesProblemes = cat,
-               error => this.errorMessage = <any>error);    
+              error => this.errorMessage = <any>error);    
+    }
+
+
+  applicationNotifications(typeNotification: string): void {
+    const telephoneControl = this.problemeForm.get('typeNotification.telephone');
+   
+
+    const courrielControl = this.problemeForm.get('typeNotification.courriel');
+    const confirmationControl = this.problemeForm.get('typeNotification.confirmation');
+
+    if (typeNotification === 'NePasMeNotifier'){
+      telephoneControl.clearValidators();
+      telephoneControl.reset();
+      telephoneControl.disable();
+
+      courrielControl.clearValidators();
+      courrielControl.reset();
+      courrielControl.disable();
+
+      confirmationControl.clearValidators();
+      confirmationControl.reset();
+      confirmationControl.disable();
+    }
   }
 }

@@ -3,6 +3,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProblemeComponent } from './probleme.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { TypeService } from './type.service';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('ProblemeComponent', () => {
   let component: ProblemeComponent;
@@ -10,8 +12,9 @@ describe('ProblemeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports:[ReactiveFormsModule, AngularFontAwesomeModule],
-      declarations: [ ProblemeComponent ]
+      imports:[ReactiveFormsModule, AngularFontAwesomeModule, HttpClientModule],
+      declarations: [ ProblemeComponent ],
+      providers:[TypeService ]
     })
     .compileComponents();
   }));
@@ -82,4 +85,47 @@ it('zone PRENOM valide avec 3 caracteres', () => {
   errors = zone.errors || {};
   expect(errors['Valide']).toBeFalsy(); 
  });
+
+ it('zone TELEPHONE est desactivee quand ne pas me notifier', () => {
+  component.applicationNotifications('NePasMeNotifier');
+
+  let zone = component.problemeForm.get('typeNotification.telephone')
+  expect(zone.status).toEqual('DISABLED');
+
+ });
+
+ it('zone TELEPHONE est vide quand ne pas me notifier', () => {
+  component.applicationNotifications('NePasMeNotifier');
+  let zone = component.problemeForm.get('typeNotification.telephone')
+
+  expect(zone.value).toBeNull(); 
+});
+
+it('zone ADRESSE COURRIEL est desactivee quand ne pas me notifier', () => {
+  component.applicationNotifications('NePasMeNotifier');
+
+  let zone = component.problemeForm.get('typeNotification.courriel')
+  expect(zone.status).toEqual('DISABLED');
+});
+
+it('zone ADRESSE COURRIEL est vide quand ne pas me notifier', () => {
+  component.applicationNotifications('NePasMeNotifier');
+  let zone = component.problemeForm.get('typeNotification.courriel')
+
+  expect(zone.value).toBeNull(); 
+});
+
+it('zone CONFIRMER COURRIEL est desactivee quand ne pas me notifier', () => {
+  component.applicationNotifications('NePasMeNotifier');
+
+  let zone = component.problemeForm.get('typeNotification.confirmation')
+  expect(zone.status).toEqual('DISABLED');
+});
+
+it('zone CONFIRMER COURRIEL est vide quand ne pas me notifier', () => {
+  component.applicationNotifications('NePasMeNotifier');
+  let zone = component.problemeForm.get('typeNotification.confirmation')
+
+  expect(zone.value).toBeNull(); 
+});
 });
